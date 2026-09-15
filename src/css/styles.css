@@ -1,0 +1,168 @@
+/* ------------------------------------------------------------
+   VARIABLES CSS (custom properties)
+   Antes los colores estaban escritos como literales hexadecimales
+   repetidos por todo el archivo. Conteo de repeticiones original
+   (sumando <style> + estilos en línea):
+     --color-cyan  (#00f0ff) -> aparecía 6 veces
+     --color-pink  (#ff007f) -> aparecía 5 veces
+     --color-bg    (#0a0a12) -> aparecía 2 veces
+     --color-bg-alt(#1a1a2e) -> aparecía 2 veces
+   Centralizarlos en :root evita que, si el diseño cambia de color,
+   haya que buscar y reemplazar el mismo hex en múltiples lugares
+   (y arriesgarse a dejar alguno olvidado).
+   ------------------------------------------------------------ */
+:root {
+    --color-cyan: #00f0ff;
+    --color-pink: #ff007f;
+    --color-bg: #0a0a12;
+    --color-bg-alt: #1a1a2e;
+    --color-white: #ffffff;
+}
+
+/* ------------------------------------------------------------
+   BOX-SIZING GLOBAL
+   Qué cambió: por defecto el modelo de caja es "content-box", es
+   decir que width/height sólo definen el tamaño del CONTENIDO, y
+   el padding y el border se SUMAN por fuera, agrandando la caja
+   real en pantalla. Con box-sizing: border-box, el padding y el
+   border quedan INCLUIDOS dentro del width/height declarado, así
+   que la caja ocupa exactamente el ancho que uno escribió y es
+   mucho más fácil de predecir (ver el cálculo de .tarjeta en el
+   documento de explicación).
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+}
+
+header {
+    background-color: var(--color-pink);
+    padding: 20px;
+}
+
+/* Reemplaza el antiguo <center> alrededor del h1 y el <font color="white"> */
+.header-content {
+    text-align: center;
+}
+
+/* Reemplaza el style="color: #00f0ff; margin: 0;" del h1 */
+.titulo-principal {
+    color: var(--color-cyan);
+    margin: 0;
+}
+
+/* Reemplaza el style="margin-top: 5px;" del párrafo de subtítulo
+   (el color blanco ya lo hereda de body, por eso el <font color="white">
+   original no aportaba nada visualmente) */
+.subtitulo {
+    margin-top: 5px;
+}
+
+nav a {
+    color: var(--color-white);
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+/* Estados de interacción del menú (accesibilidad: :focus para
+   quien navega con teclado, no sólo con mouse) */
+nav a:hover,
+nav a:focus {
+    color: var(--color-cyan);
+    text-decoration: underline;
+}
+
+
+/* Reemplaza el style="padding: 20px;" del <main> */
+.main-content {
+    padding: 20px;
+}
+
+h2 {
+    color: var(--color-cyan);
+    border-bottom: 2px solid var(--color-cyan);
+}
+
+.tarjeta {
+    border: 2px solid var(--color-pink);
+    padding: 15px;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+#destacado {
+    background-color: var(--color-bg-alt);
+}
+
+/* Reemplaza style="color: #00f0ff;" en el h3 de la tarjeta destacada */
+.card-title-cyan {
+    color: var(--color-cyan);
+}
+
+/* Reemplaza style="color: #ff007f;" en los h3 de Arcade Retro y Arena eSports */
+.card-title-pink {
+    color: var(--color-pink);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td,
+th {
+    border: 1px solid var(--color-cyan);
+    padding: 8px;
+}
+
+/* Reemplaza el <center> que envolvía el horario de domingos */
+.centrado {
+    text-align: center;
+}
+
+/* Reemplaza el style="background-color:#00f0ff; color:#0a0a12;
+   padding:10px 20px; border:none; font-weight:bold;" del botón */
+.btn-enviar {
+    background-color: var(--color-cyan);
+    color: var(--color-bg);
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-enviar:hover,
+.btn-enviar:focus {
+    background-color: var(--color-white);
+    color: var(--color-bg);
+    outline: 2px solid var(--color-pink);
+}
+
+footer {
+    background-color: var(--color-pink);
+    color: var(--color-white);
+    padding: 20px;
+}
+
+/* Reemplaza style="margin: 0;" del primer párrafo del footer */
+.footer-linea {
+    margin: 0;
+}
+
+/* Reemplaza style="margin-top: 5px; color: #1a1a2e;" del segundo
+   párrafo del footer. Se deja el mismo color que en el original
+   para no alterar el resultado visual (así lo pide la consigna),
+   aunque vale la pena anotar que ese contraste es muy bajo sobre
+   fondo rosado y sería un problema de accesibilidad a corregir
+   en una siguiente iteración. */
+.footer-contacto {
+    margin-top: 5px;
+    color: var(--color-bg-alt);
+}
